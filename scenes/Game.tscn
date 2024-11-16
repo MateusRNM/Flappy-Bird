@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=3 uid="uid://h0cqfjyhhkpo"]
+
+[ext_resource type="FontFile" uid="uid://dh4aq06gyka4n" path="res://font/pixelart.ttf" id="1_04kqv"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_ek501"]
+[ext_resource type="Texture2D" uid="uid://dwsnvwj26r7xh" path="res://sprites/ground/ground.png" id="3_wexmo"]
+[ext_resource type="StyleBox" uid="uid://csdu603p7fpc8" path="res://styles/btnstyle.tres" id="4_ggm55"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w0dva"]
+texture = ExtResource("3_wexmo")
+texture_region_size = Vector2i(32, 32)
+use_texture_padding = false
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-31, -16.25, -30.5, 15.75, 30.75, 15.25, 31, -15.75)
+
+[sub_resource type="TileSet" id="TileSet_1i7rl"]
+tile_size = Vector2i(31, 16)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_w0dva")
+
+[sub_resource type="LabelSettings" id="LabelSettings_c3ota"]
+font = ExtResource("1_04kqv")
+font_size = 32
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_ek501")
+
+[node name="cameraplayer" type="Camera2D" parent="."]
+position = Vector2(299, 404)
+
+[node name="background" type="ColorRect" parent="cameraplayer"]
+offset_left = -313.0
+offset_top = -424.0
+offset_right = 319.0
+offset_bottom = 408.0
+mouse_filter = 2
+color = Color(0, 0.494118, 0.968627, 1)
+
+[node name="ground" type="TileMap" parent="cameraplayer"]
+tile_set = SubResource("TileSet_1i7rl")
+format = 2
+layer_0/tile_data = PackedInt32Array(1572873, 0, 0, 1572872, 0, 0, 1572871, 0, 0, 1572870, 0, 0, 1572869, 0, 0, 1572868, 0, 0, 1572867, 0, 0, 1572866, 0, 0, 1572865, 0, 0, 1572864, 0, 0, 1638399, 0, 0, 1638398, 0, 0, 1638397, 0, 0, 1638396, 0, 0, 1638395, 0, 0, 1638394, 0, 0, 1638393, 0, 0, 1638392, 0, 0, 1638391, 0, 0, 1638390, 0, 0)
+
+[node name="Score" type="Label" parent="cameraplayer"]
+visible = false
+z_index = 1
+offset_left = -295.0
+offset_top = -393.0
+offset_right = -215.0
+offset_bottom = -361.0
+text = "SCORE:"
+label_settings = SubResource("LabelSettings_c3ota")
+
+[node name="scoreNum" type="Label" parent="cameraplayer"]
+visible = false
+z_index = 1
+offset_left = -213.0
+offset_top = -392.0
+offset_right = -177.0
+offset_bottom = -360.0
+text = "0"
+label_settings = SubResource("LabelSettings_c3ota")
+
+[node name="defeatTxt" type="Label" parent="cameraplayer"]
+visible = false
+z_index = 1
+offset_left = -110.0
+offset_top = -166.0
+offset_right = 108.0
+offset_bottom = -131.0
+text = "TENTE NOVAMENTE!"
+label_settings = SubResource("LabelSettings_c3ota")
+
+[node name="restartBtn" type="Button" parent="cameraplayer"]
+visible = false
+z_index = 1
+offset_left = -96.0
+offset_top = -129.0
+offset_right = 90.0
+offset_bottom = -82.0
+theme_override_fonts/font = ExtResource("1_04kqv")
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = ExtResource("4_ggm55")
+theme_override_styles/hover = ExtResource("4_ggm55")
+theme_override_styles/pressed = ExtResource("4_ggm55")
+theme_override_styles/disabled = ExtResource("4_ggm55")
+theme_override_styles/focus = ExtResource("4_ggm55")
+action_mode = 0
+text = "RECOMEÇAR"
+
+[node name="menuBtn" type="Button" parent="cameraplayer"]
+visible = false
+z_index = 1
+offset_left = -95.0
+offset_top = -75.0
+offset_right = 91.0
+offset_bottom = -28.0
+theme_override_fonts/font = ExtResource("1_04kqv")
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = ExtResource("4_ggm55")
+theme_override_styles/hover = ExtResource("4_ggm55")
+theme_override_styles/pressed = ExtResource("4_ggm55")
+theme_override_styles/disabled = ExtResource("4_ggm55")
+theme_override_styles/focus = ExtResource("4_ggm55")
+action_mode = 0
+text = "MENU"
+
+[node name="start" type="Label" parent="."]
+z_index = 1
+offset_left = 97.0
+offset_top = 33.0
+offset_right = 447.0
+offset_bottom = 65.0
+text = "APERTE ESPAÇO PARA COMEÇAR"
+label_settings = SubResource("LabelSettings_c3ota")
+
+[connection signal="pressed" from="cameraplayer/restartBtn" to="." method="_on_restart_btn_pressed"]
+[connection signal="pressed" from="cameraplayer/menuBtn" to="." method="_on_menu_btn_pressed"]

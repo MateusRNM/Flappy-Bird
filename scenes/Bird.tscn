@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://b3abby2iyxmp4"]
+
+[ext_resource type="Texture2D" uid="uid://b6angfcfyuacw" path="res://sprites/bird/yellowbird-midflap.png" id="1_ineej"]
+[ext_resource type="Script" path="res://scripts/bird.gd" id="1_y0pu6"]
+[ext_resource type="Texture2D" uid="uid://cuo57ucyw76il" path="res://sprites/bird/yellowbird-upflap.png" id="2_l1u0j"]
+[ext_resource type="Texture2D" uid="uid://chi2eddrrigru" path="res://sprites/bird/yellowbird-downflap.png" id="3_xsu5y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ncpkt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ineej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_l1u0j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ineej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xsu5y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ineej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_l1u0j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ineej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xsu5y")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 9.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2c8yd"]
+radius = 6.26315
+height = 12.5263
+
+[node name="Bird" type="Node2D"]
+
+[node name="Bird" type="CharacterBody2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_y0pu6")
+
+[node name="bird" type="AnimatedSprite2D" parent="Bird"]
+position = Vector2(-5.99996, -2.74998)
+scale = Vector2(1.05882, 1.22917)
+sprite_frames = SubResource("SpriteFrames_ncpkt")
+animation = &"fly"
+autoplay = "fly"
+
+[node name="colisor" type="CollisionShape2D" parent="Bird"]
+position = Vector2(-7, -3)
+scale = Vector2(2.23529, 2.08333)
+shape = SubResource("CapsuleShape2D_2c8yd")

@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccxlr5ccg4y54"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_2ie82"]
+[ext_resource type="FontFile" uid="uid://dh4aq06gyka4n" path="res://font/pixelart.ttf" id="2_uxoas"]
+[ext_resource type="StyleBox" uid="uid://csdu603p7fpc8" path="res://styles/btnstyle.tres" id="3_qt4vj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_386dc"]
+font = ExtResource("2_uxoas")
+font_size = 45
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_2ie82")
+
+[node name="backgroundMenu" type="ColorRect" parent="."]
+offset_right = 620.0
+offset_bottom = 834.0
+mouse_filter = 2
+color = Color(0.0117647, 0.388235, 0.494118, 1)
+
+[node name="title" type="Label" parent="."]
+offset_left = 185.0
+offset_top = 1.0
+offset_right = 390.0
+offset_bottom = 47.0
+text = "FLAPPY BIRD"
+label_settings = SubResource("LabelSettings_386dc")
+
+[node name="startBtn" type="Button" parent="."]
+offset_left = 236.0
+offset_top = 250.0
+offset_right = 382.0
+offset_bottom = 320.0
+theme_override_fonts/font = ExtResource("2_uxoas")
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = ExtResource("3_qt4vj")
+theme_override_styles/hover = ExtResource("3_qt4vj")
+theme_override_styles/pressed = ExtResource("3_qt4vj")
+theme_override_styles/disabled = ExtResource("3_qt4vj")
+theme_override_styles/focus = ExtResource("3_qt4vj")
+action_mode = 0
+text = "COMEÇAR"
+
+[connection signal="pressed" from="startBtn" to="." method="_on_start_btn_pressed"]

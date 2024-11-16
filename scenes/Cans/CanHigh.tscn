@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bai3dinclhapf"]
+
+[ext_resource type="Script" path="res://scripts/can.gd" id="1_k1k18"]
+[ext_resource type="Texture2D" uid="uid://bk3dafpdld2ij" path="res://sprites/canes/green-cane - down.png" id="1_ogi4p"]
+[ext_resource type="Texture2D" uid="uid://cli5gbw40p4w2" path="res://sprites/canes/green-cane - up.png" id="2_ebs17"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_01tqu"]
+texture = ExtResource("1_ogi4p")
+margins = Vector2i(3, 0)
+0:17/size_in_atlas = Vector2i(3, 3)
+0:17/0 = 0
+0:17/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:17/0/physics_layer_0/angular_velocity = 0.0
+0:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24.5, -24.5, 22, 23, 22.5, 22, -23.5)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vv17r"]
+texture = ExtResource("2_ebs17")
+0:11/size_in_atlas = Vector2i(3, 9)
+0:11/0 = 0
+0:11/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:11/0/physics_layer_0/angular_velocity = 0.0
+0:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(24.0416, 74.2462, -21, 72, -23.3345, 71.4178, -23.3345, -72.1249, 23.3345, -71.4178)
+0:0/size_in_atlas = Vector2i(3, 3)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-23.5, -22.5, -24, 24.5, 22, 25.5, 23, -23.5)
+
+[sub_resource type="TileSet" id="TileSet_0563e"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 2
+sources/0 = SubResource("TileSetAtlasSource_01tqu")
+sources/1 = SubResource("TileSetAtlasSource_vv17r")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rx4ua"]
+size = Vector2(48, 98.5)
+
+[node name="CanHigh" type="Node2D"]
+script = ExtResource("1_k1k18")
+
+[node name="can" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_0563e")
+format = 2
+layer_0/tile_data = PackedInt32Array(-327679, 1, 268435467, -917503, 1, 268435467, 1703937, 1, 11, 1638401, 1, 11, 1114113, 1, 11, 917505, 1, 11, 589825, 1, 0, 1, 0, 17, -1376255, 1, 268435467, -1441791, 1, 268435467, -1507327, 1, 268435467, -1572863, 1, 268435467, -1638399, 1, 268435467, 2228225, 1, 11)
+
+[node name="point" type="Area2D" parent="."]
+position = Vector2(23, 326)
+collision_mask = 2
+
+[node name="colisor" type="CollisionShape2D" parent="point"]
+position = Vector2(3, -247)
+shape = SubResource("RectangleShape2D_rx4ua")
+
+[connection signal="body_shape_entered" from="point" to="." method="_on_point_body_shape_entered"]
